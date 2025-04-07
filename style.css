@@ -19,50 +19,37 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
   
-  /* 输入框和按钮 */
+  /* 输入行：采用 flex 布局，使 label 和 input 在同一行排列 */
   .inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
   }
-  .inputs input,
-  .inputs button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  /* 每行的容器，主要用于 label + input */
-.input-line {
-    margin: 10px 0;
-    text-align: left; /* 如果希望在一行左对齐 */
-  }
   
-  /* 让 label 和 input 同行排列，并在冒号后面紧跟输入框 */
-  .input-line label {
-    display: inline-block;
+  .inputs label {
     margin-right: 8px;
-    min-width: 300px; /* 给 label 一个固定宽度，也可根据需要调整 */
-    text-align: right; /* 冒号对齐 */
+    min-width: 250px; /* 固定宽度，保证冒号对齐 */
+    text-align: right;
   }
   
-  /* 按钮行，单独设置一个类方便居中 */
-.button-line {
-    margin: 20px 0;
-    text-align: center;
-  }
-  
-  /* 调整输入框样式（可根据需要自定义） */
-  .input-line input {
+  .inputs input {
     padding: 5px 10px;
     font-size: 14px;
   }
   
-  /* 调整按钮样式 */
+  /* 按钮行，居中显示 */
+  .button-line {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
   .button-line button {
     padding: 8px 16px;
     font-size: 16px;
     cursor: pointer;
   }
-
+  
   /* 轮盘容器 */
   .roulette-container {
     position: relative;
@@ -78,26 +65,30 @@ body {
     display: block;
   }
   
-  /* 小球容器，用于旋转 */
   .ball-container {
     position: absolute;
-    width: 400px;
+    width: 400px;       /* 与轮盘图片相同大小 */
     height: 400px;
     top: 0;
     left: 0;
-    transform-origin: 50% 50%;
+    transform-origin: 50% 50%; /* 以中心为旋转原点 */
   }
   
-  /* 小球样式 */
   .ball {
     position: absolute;
     width: 20px;
     height: 20px;
     background-color: white;
-    border: 1px solid black; /* 添加黑色边框 */
+    border: 1px solid black;
     border-radius: 50%;
-    top: 0;
-    left: 160px;
+    
+    /* 1) 让小球中心与容器中心重合 */
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%)
+      /* 2) 再额外向上移动 140px，让小球处在半径=140px 的位置 */
+      translate(0, -140px);
   }
   
   
