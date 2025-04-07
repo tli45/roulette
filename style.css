@@ -32,17 +32,11 @@ body::before {
   background: rgba(0, 0, 0, 0.5); /* 0.5 可根据需要调整透明度 */
   z-index: -1;  /* 放在内容后面 */
 }
-
-/* 示例：使主要内容浮于背景上方 */
-.container {
-  position: relative;
-  z-index: 1;
-  /* 其它样式 */
-}
-  
   
 /* 居中容器 */
 .container {
+  position: relative;
+  z-index: 1;
   background: #fff;
   padding: 20px 30px;
   border-radius: 8px;
