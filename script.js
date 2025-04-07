@@ -21,6 +21,13 @@ document.getElementById("closeBtnLose").addEventListener("click", function() {
   document.getElementById("loseModal").style.display = "none";
 });
 
+// 绑定空钱模态窗口按钮事件，当总金额为0时点击“add money to continue”
+document.getElementById("addMoneyBtn").addEventListener("click", function() {
+  totalMoney += 100;  // 增加 100 块
+  document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
+  document.getElementById("emptyMoneyModal").style.display = "none";
+});
+
 // 全局变量定义
 let angle = 0;             // 当前旋转角度
 let speed = 0;             // 当前旋转速度（度/帧）
@@ -46,8 +53,9 @@ const pockets = [
 const pocketCount = pockets.length; // 38
 const segmentAngle = 360 / pocketCount;  // ≈9.4737°
 
-// offsetAngle 用于校正轮盘图片的实际朝向，如果图片中"0"不在正上方请调整该值
-const offsetAngle = 180+360 / pocketCount/2;  // 根据实际情况调整
+// offsetAngle 用于校正轮盘图片的实际朝向
+// 这里设置为：180度 + 半个分格角度，确保图片中"0"位于正下方
+const offsetAngle = 180 + segmentAngle / 2;
 
 /**
  * 根据当前角度返回对应的轮盘数字
@@ -55,7 +63,7 @@ const offsetAngle = 180+360 / pocketCount/2;  // 根据实际情况调整
  * @returns 返回对应的口袋数字（可能是数字或"00"）
  */
 function getPocketByAngle(angle) {
-  // 将角度归一化到[0, 360)
+  // 将角度归一化到 [0, 360)
   angle = ((angle % 360) + 360) % 360;
   // 加上偏移量以校正图片朝向
   let adjustedAngle = angle + offsetAngle;
@@ -66,23 +74,30 @@ function getPocketByAngle(angle) {
 
 /**
  * 开始游戏函数，验证输入并启动旋转动画
+ * 当总金额为0时，弹出“add money”窗口，不启动游戏
  */
 function startGame() {
+  // 如果总金额为0，则弹出空钱模态窗口
+  if (totalMoney === 0) {
+    document.getElementById("emptyMoneyModal").style.display = "flex";
+    return;
+  }
+  
   // 获取用户输入的猜测数字（允许输入"00"）和赌注金额
   const guessInput = document.getElementById("guessNumber").value;
   const bet = parseFloat(document.getElementById("betAmount").value);
 
   // 验证猜测数字：如果不是"00"，则必须是1~36之间的数字
   if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
-    alert("请输入1~36之间的数字或 '00'");
+    alert("Please make sure the number is in range of 1 to 36 or '00'");
     return;
   }
   if (isNaN(bet) || bet <= 0) {
-    alert("请输入有效的赌注");
+    alert("Please enter valid bet amount");
     return;
   }
   if (bet > totalMoney) {
-    alert("赌注不能超过当前总金额");
+    alert("Bet amount cannot exceed current total amount");
     return;
   }
   if (spinning) return;
@@ -128,12 +143,12 @@ function checkResult() {
   if (finalPocket === guess) {
     totalMoney += bet * 36;
     // 更新胜利窗口中显示最终数字的文本
-    document.getElementById("resultTextWin").innerText = "Result：" + finalPocket;
+    document.getElementById("resultTextWin").innerText = "Result Number: " + finalPocket;
     showWinModal();
   } else {
     totalMoney -= bet;
     // 更新失败窗口中显示最终数字的文本
-    document.getElementById("resultTextLose").innerText = "Result：" + finalPocket;
+    document.getElementById("resultTextLose").innerText = "Result Number: " + finalPocket;
     showLoseModal();
   }
   document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
