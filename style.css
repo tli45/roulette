@@ -16,7 +16,7 @@ html, body {
 body {
   margin: 0;
   padding: 0;
-  background: url('images/your-background.jpg') no-repeat center center fixed;
+  background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative;  /* 为伪元素定位做准备 */
 }
