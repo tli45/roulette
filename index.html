@@ -13,10 +13,15 @@
     <h1>Roulette Game</h1>
     <div class="inputs">
       <!-- 输入猜测数字 -->
-      <P>Please enter your guess number in range of 1~36: </P><input type="number" id="guessNumber" placeholder="Please enter your guess number in range of 1~36" min="1" max="36" />
+      <label for="guessNumber">Please enter your guess number in range of 1-36:</label>
+      <input type="number" id="guessNumber" placeholder="Please enter your guess number in range of 1~36" min="1" max="36" />
       <!-- 输入赌注 -->
-      <P>Please enter your bet: </P><input type="number" id="betAmount" placeholder="Please enter your bet" min="1" />
-      <button id="startBtn">START</button>
+      <label for="betAmount">Please enter your bet:</label>
+      <input type="number" id="betAmount" placeholder="Please enter your bet" min="1" />
+      
+      <div class="button-line">
+        <button id="startBtn">START</button>
+      </div>
     </div>
 
     <!-- 轮盘容器 -->

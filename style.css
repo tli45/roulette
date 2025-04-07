@@ -29,6 +29,39 @@ body {
     padding: 10px;
     font-size: 16px;
   }
+
+  /* 每行的容器，主要用于 label + input */
+.input-line {
+    margin: 10px 0;
+    text-align: left; /* 如果希望在一行左对齐 */
+  }
+  
+  /* 让 label 和 input 同行排列，并在冒号后面紧跟输入框 */
+  .input-line label {
+    display: inline-block;
+    margin-right: 8px;
+    min-width: 300px; /* 给 label 一个固定宽度，也可根据需要调整 */
+    text-align: right; /* 冒号对齐 */
+  }
+  
+  /* 按钮行，单独设置一个类方便居中 */
+.button-line {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  /* 调整输入框样式（可根据需要自定义） */
+  .input-line input {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  /* 调整按钮样式 */
+  .button-line button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   
   /* 轮盘容器 */
   .roulette-container {
@@ -47,7 +80,7 @@ body {
   
   /* 小球容器，用于旋转 */
   .ball-container {
-    position: absolute;
+    position: center;
     width: 300px;
     height: 300px;
     top: 0;
