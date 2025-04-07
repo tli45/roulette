@@ -1,21 +1,30 @@
 // 绑定 START 按钮点击事件
 document.getElementById("startBtn").addEventListener("click", startGame);
 
-// 为两个 Play Again 按钮分别绑定事件
+// 为胜利模态窗口的按钮绑定事件
 document.getElementById("playAgainBtnWin").addEventListener("click", function() {
   document.getElementById("winModal").style.display = "none";
   resetGame();
+  startGame();  // 直接启动游戏
+});
+document.getElementById("closeBtnWin").addEventListener("click", function() {
+  document.getElementById("winModal").style.display = "none";
 });
 
+// 为失败模态窗口的按钮绑定事件
 document.getElementById("playAgainBtnLose").addEventListener("click", function() {
   document.getElementById("loseModal").style.display = "none";
   resetGame();
+  startGame();  // 直接启动游戏
+});
+document.getElementById("closeBtnLose").addEventListener("click", function() {
+  document.getElementById("loseModal").style.display = "none";
 });
 
 // 全局变量定义
 let angle = 0;             // 当前旋转角度
 let speed = 0;             // 当前旋转速度（度/帧）
-let deceleration = 0.04;   // 减速度（度/帧²）
+let deceleration = 0.05;   // 减速度（度/帧²）
 let spinning = false;      // 是否正在旋转
 let totalMoney = 100;      // 初始金额为 100
 
@@ -42,7 +51,6 @@ function startGame() {
   }
   if (spinning) return;
 
-  // 初始化旋转速度（随机范围内）
   speed = 10 + Math.random() * 10;
   spinning = true;
   requestAnimationFrame(spin);
@@ -72,7 +80,6 @@ function spin() {
  * 检查结果，并更新总金额
  */
 function checkResult() {
-  // 假设转盘分为 36 格，每格 10 度
   const finalPocket = Math.floor(angle / 10);
   const guess = parseInt(document.getElementById("guessNumber").value, 10);
   const bet = parseFloat(document.getElementById("betAmount").value);
@@ -102,7 +109,7 @@ function showLoseModal() {
 }
 
 /**
- * 重置游戏状态（例如小球角度）
+ * 重置游戏状态（如小球角度）
  */
 function resetGame() {
   angle = 0;
