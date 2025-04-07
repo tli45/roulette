@@ -47,9 +47,13 @@ html, body {
 }
 
 .button-line button {
-  padding: 8px 16px;
-  font-size: 16px;
-  cursor: pointer;
+    background-color: #28a745;       /* 绿色背景 */
+    color: #fff;                     /* 白色文字 */
+    font-family: 'Merriweather', serif; /* Merriweather 字体 */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* 轮盘容器 */
@@ -75,6 +79,7 @@ html, body {
   left: 0;
   transform-origin: 50% 50%; /* 以中心为旋转原点 */
   transform: translateZ(0);
+  pointer-events: none;
 }
 
 .ball {
@@ -100,4 +105,47 @@ html, body {
   margin-top: 20px;
   font-size: 18px;
 }
+
+
+/* Modal 弹窗 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;                /* 默认隐藏 */
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;                 /* 确保在最上层 */
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  /* Play Again 按钮样式（绿色） */
+  #playAgainBtn {
+    background-color: #28a745;
+    color: #fff;
+    font-family: 'Merriweather', serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  #playAgainBtn:hover {
+    background-color: #218838;
+  }
+  
   

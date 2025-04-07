@@ -1,10 +1,19 @@
 // 绑定按钮点击事件
 document.getElementById("startBtn").addEventListener("click", startGame);
 
+// 给 "Play Again" 按钮绑定事件，隐藏弹窗并重置状态
+document.getElementById("playAgainBtn").addEventListener("click", function() {
+  // 隐藏 modal
+  document.getElementById("winModal").style.display = "none";
+  // 重置小球相关状态（例如角度）
+  angle = 0;
+  ballContainer.style.transform = `rotate(0deg)`;
+});
+
 // 全局变量定义
 let angle = 0;             // 当前旋转角度
 let speed = 0;             // 当前旋转速度（度/帧）
-let deceleration = 0.05;   // 减速度（度/帧²）
+let deceleration = 0.04;   // 减速度（度/帧²）
 let spinning = false;      // 是否正在旋转
 let totalMoney = 100;      // 初始金额为 100
 
@@ -39,7 +48,7 @@ function startGame() {
   if (spinning) return;
 
   // 初始化旋转速度（随机范围内）
-  speed = 20 + Math.random() * 10;
+  speed = 10 + Math.random() * 10;
   spinning = true;
 
   // 启动动画
@@ -86,7 +95,8 @@ function checkResult() {
   const bet = parseFloat(document.getElementById("betAmount").value);
 
   if (finalPocket === guess) {
-    alert("YOU WIN");
+    // 显示 modal 弹窗
+    showWinModal();
     // 赢时总金额增加赌注的 36 倍
     totalMoney += bet * 36;
   } else {
@@ -96,4 +106,11 @@ function checkResult() {
 
   // 更新页面上显示的总金额
   document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
+}
+
+/**
+ * 显示胜利弹窗
+ */
+function showWinModal() {
+  document.getElementById("winModal").style.display = "flex";
 }
