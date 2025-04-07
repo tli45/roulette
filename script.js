@@ -47,7 +47,7 @@ const pocketCount = pockets.length; // 38
 const segmentAngle = 360 / pocketCount;  // ≈9.4737°
 
 // offsetAngle 用于校正轮盘图片的实际朝向，如果图片中"0"不在正上方请调整该值
-const offsetAngle = 0;  // 根据实际情况调整
+const offsetAngle = 180;  // 根据实际情况调整
 
 /**
  * 根据当前角度返回对应的轮盘数字
@@ -128,12 +128,12 @@ function checkResult() {
   if (finalPocket === guess) {
     totalMoney += bet * 36;
     // 更新胜利窗口中显示最终数字的文本
-    document.getElementById("resultTextWin").innerText = "最终数字：" + finalPocket;
+    document.getElementById("resultTextWin").innerText = "Result：" + finalPocket;
     showWinModal();
   } else {
     totalMoney -= bet;
     // 更新失败窗口中显示最终数字的文本
-    document.getElementById("resultTextLose").innerText = "最终数字：" + finalPocket;
+    document.getElementById("resultTextLose").innerText = "Result：" + finalPocket;
     showLoseModal();
   }
   document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
