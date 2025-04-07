@@ -84,10 +84,10 @@ html, body {
 
 .ball {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 50%;
   
   /* 1) 让小球中心与容器中心重合 */
