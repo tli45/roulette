@@ -72,6 +72,7 @@ body {
     top: 0;
     left: 0;
     transform-origin: 50% 50%; /* 以中心为旋转原点 */
+    transform: translateZ(0);
   }
   
   .ball {
