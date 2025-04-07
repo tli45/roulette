@@ -42,13 +42,22 @@
     <div id="totalMoney">Total Money: 100</div>
   </div>
 
+  <!-- YOU WON 模态窗口 -->
   <div id="winModal" class="modal">
-      <div class="modal-content">
-        <h2>YOU WON!</h2>
-        <!-- 请将 win-image.png 换成你实际的图片名称 -->
-        <img src="images/win-image.png" alt="Win Image" />
-        <button id="playAgainBtn">Play Again</button>
-      </div>
+    <div class="modal-content">
+      <h2>YOU WON!</h2>
+      <img src="images/win-image.png" alt="Win Image" />
+      <button id="playAgainBtnWin">Play Again</button>
+    </div>
+  </div>
+  
+  <!-- YOU LOSE 模态窗口 -->
+  <div id="loseModal" class="modal">
+    <div class="modal-content">
+      <h2>YOU LOSE!</h2>
+      <img src="images/lose-image.png" alt="Lose Image" />
+      <button id="playAgainBtnLose">Play Again</button>
+    </div>
   </div>
 
   <!-- 引入JS -->
