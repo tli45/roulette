@@ -20,18 +20,18 @@ function startGame() {
   const bet = parseFloat(document.getElementById("betAmount").value);
 
   // 检查输入的数字是否合法
-  if (isNaN(guess) || guess < 0 || guess > 35) {
-    alert("请输入 0~35 之间的数字");
+  if (isNaN(guess) || guess < 1 || guess > 36) {
+    alert("Please enter your guess number in range of 1~36");
     return;
   }
   // 检查赌注是否合法
   if (isNaN(bet) || bet <= 0) {
-    alert("请输入有效的赌注金额");
+    alert("Please enter valid bet");
     return;
   }
   // 检查赌注不能超过当前总金额
   if (bet > totalMoney) {
-    alert("赌注不能超过当前总金额");
+    alert("Bet cannot be greater than total money");
     return;
   }
 

@@ -61,10 +61,12 @@ body {
     width: 20px;
     height: 20px;
     background-color: white;
+    border: 1px solid black; /* 添加黑色边框 */
     border-radius: 50%;
-    top: 0;          /* 小球放在容器顶部 */
-    left: 160px;     /* 根据轮盘大小调整，确保贴近外圈 */
+    top: 0;
+    left: 160px;
   }
+  
   
   /* 总金额显示 */
   #totalMoney {
