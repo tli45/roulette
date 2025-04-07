@@ -62,7 +62,7 @@ body {
     font-size: 16px;
     cursor: pointer;
   }
-  
+
   /* 轮盘容器 */
   .roulette-container {
     position: relative;
@@ -80,9 +80,9 @@ body {
   
   /* 小球容器，用于旋转 */
   .ball-container {
-    position: center;
-    width: 300px;
-    height: 300px;
+    position: absolute;
+    width: 400px;
+    height: 400px;
     top: 0;
     left: 0;
     transform-origin: 50% 50%;
