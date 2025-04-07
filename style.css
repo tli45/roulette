@@ -1,0 +1,42 @@
+/* 基本样式 */
+body {
+    margin: 20px;
+    font-family: sans-serif;
+  }
+  
+  /* 轮盘容器 */
+  .roulette-container {
+    position: relative;
+    width: 400px;   /* 可以根据实际图片大小进行调整 */
+    height: 400px;
+    margin-top: 20px;
+  }
+  
+  /* 轮盘图片 */
+  .roulette-wheel {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  /* 小球容器，用于旋转 */
+  .ball-container {
+    position: absolute;
+    width: 400px;   /* 与轮盘容器相同大小 */
+    height: 400px;
+    top: 0;
+    left: 0;
+    transform-origin: 50% 50%; /* 以中心为旋转原点 */
+  }
+  
+  /* 小球本身 */
+  .ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 0;          /* 小球在容器里顶部 */
+    left: 160px;     /* 将小球偏移到靠近轮盘外缘(可自行微调) */
+  }
+  

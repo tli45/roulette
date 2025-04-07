@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roulette Game</title>
+  <!-- 引入CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Roulette Game</h1>
+
+  <!-- 输入猜测数字 -->
+  <input type="number" id="guessNumber" placeholder="请输入0~35之间的数字" min="0" max="35" />
+  <button id="startBtn">START</button>
+
+  <!-- 轮盘容器 -->
+  <div class="roulette-container">
+    <img src="images/roulette.png" class="roulette-wheel" alt="Roulette Wheel" />
+    <!-- 小球容器（用来旋转） -->
+    <div class="ball-container" id="ballContainer">
+      <div class="ball"></div>
+    </div>
+  </div>
+
+  <!-- 显示总金额 -->
+  <div id="totalMoney">Total Money: 1000</div>
+
+  <!-- 引入JS -->
+  <script src="script.js"></script>
+</body>
+</html>
