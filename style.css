@@ -11,6 +11,35 @@ html, body {
     min-height: 100vh;
     overflow: hidden;
 }
+
+/* 设置 body 背景图片 */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('images/your-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;  /* 为伪元素定位做准备 */
+}
+
+/* 使用 ::before 添加一个黑色半透明遮罩 */
+body::before {
+  content: "";
+  position: fixed; /* 固定在整个页面 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 0.5 可根据需要调整透明度 */
+  z-index: -1;  /* 放在内容后面 */
+}
+
+/* 示例：使主要内容浮于背景上方 */
+.container {
+  position: relative;
+  z-index: 1;
+  /* 其它样式 */
+}
+  
   
 /* 居中容器 */
 .container {
@@ -155,6 +184,14 @@ html, body {
   background-color: #218838;
 }
 
+#guessNumber {
+    width: 120px; /* 根据需要调整数值 */
+}  
+
+#betAmount {
+    width: 120px; /* 根据需要调整数值 */
+}  
+
 #closeBtnWin,
 #closeBtnLose {
 background-color: #656060; 
@@ -164,7 +201,7 @@ color: #fff;
 /* 调整胜利和失败模态窗口中图片的尺寸 */
 #winModal .modal-content img,
 #loseModal .modal-content img {
-  width: 150px;  /* 根据需要设置合适的宽度 */
+  width: 130px;  /* 根据需要设置合适的宽度 */
   height: auto;  /* 高度自适应 */
 }
 
