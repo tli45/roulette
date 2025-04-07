@@ -47,7 +47,7 @@ const pocketCount = pockets.length; // 38
 const segmentAngle = 360 / pocketCount;  // ≈9.4737°
 
 // offsetAngle 用于校正轮盘图片的实际朝向，如果图片中"0"不在正上方请调整该值
-const offsetAngle = 180;  // 根据实际情况调整
+const offsetAngle = 180+360 / pocketCount/2;  // 根据实际情况调整
 
 /**
  * 根据当前角度返回对应的轮盘数字
