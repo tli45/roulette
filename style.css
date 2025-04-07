@@ -59,7 +59,7 @@ html, body {
 /* 轮盘容器 */
 .roulette-container {
   position: relative;
-  width: 400px;   /* 根据实际图片大小调整 */
+  width: 400px; 
   height: 400px;
   margin: 0 auto;
 }
@@ -165,7 +165,7 @@ html, body {
 
 #closeBtnWin,
 #closeBtnLose {
-background-color: #656060; 
+background-color: #848080; 
 color: #fff;  
 }
 
