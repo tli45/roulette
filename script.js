@@ -39,7 +39,7 @@ function startGame() {
   if (spinning) return;
 
   // 初始化旋转速度（随机范围内）
-  speed = 20 + Math.random() * 10;
+  speed = 15 + Math.random() * 10;
   spinning = true;
 
   // 启动动画
