@@ -1,15 +1,41 @@
-/* 基本样式 */
+/* 全局样式 */
 body {
-    margin: 20px;
-    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Merriweather', serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 居中容器 */
+  .container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /* 输入框和按钮 */
+  .inputs {
+    margin-bottom: 20px;
+  }
+  .inputs input,
+  .inputs button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
   }
   
   /* 轮盘容器 */
   .roulette-container {
     position: relative;
-    width: 400px;   /* 可以根据实际图片大小进行调整 */
+    width: 400px;   /* 根据实际图片大小调整 */
     height: 400px;
-    margin-top: 20px;
+    margin: 0 auto;
   }
   
   /* 轮盘图片 */
@@ -22,21 +48,27 @@ body {
   /* 小球容器，用于旋转 */
   .ball-container {
     position: absolute;
-    width: 400px;   /* 与轮盘容器相同大小 */
+    width: 400px;
     height: 400px;
     top: 0;
     left: 0;
-    transform-origin: 50% 50%; /* 以中心为旋转原点 */
+    transform-origin: 50% 50%;
   }
   
-  /* 小球本身 */
+  /* 小球样式 */
   .ball {
     position: absolute;
     width: 20px;
     height: 20px;
     background-color: white;
     border-radius: 50%;
-    top: 0;          /* 小球在容器里顶部 */
-    left: 160px;     /* 将小球偏移到靠近轮盘外缘(可自行微调) */
+    top: 0;          /* 小球放在容器顶部 */
+    left: 160px;     /* 根据轮盘大小调整，确保贴近外圈 */
+  }
+  
+  /* 总金额显示 */
+  #totalMoney {
+    margin-top: 20px;
+    font-size: 18px;
   }
   
