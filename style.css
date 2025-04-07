@@ -1,5 +1,5 @@
 /* 全局样式 */
-body {
+html, body {
     margin: 0;
     padding: 0;
     font-family: 'Merriweather', serif;
@@ -8,94 +8,96 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
+    min-height: 100vh;
+    overflow: hidden;
+}
   
-  /* 居中容器 */
-  .container {
-    background: #fff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
+/* 居中容器 */
+.container {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 输入行：采用 flex 布局，使 label 和 input 在同一行排列 */
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.inputs label {
+  margin-right: 8px;
+  min-width: 250px; /* 固定宽度，保证冒号对齐 */
+  text-align: right;
+}
+
+.inputs input {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* 按钮行，居中显示 */
+.button-line {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.button-line button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 轮盘容器 */
+.roulette-container {
+  position: relative;
+  width: 400px;   /* 根据实际图片大小调整 */
+  height: 400px;
+  margin: 0 auto;
+}
+
+/* 轮盘图片 */
+.roulette-wheel {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ball-container {
+  position: absolute;
+  width: 400px;       /* 与轮盘图片相同大小 */
+  height: 400px;
+  top: 0;
+  left: 0;
+  transform-origin: 50% 50%; /* 以中心为旋转原点 */
+  transform: translateZ(0);
+}
+
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
   
-  /* 输入行：采用 flex 布局，使 label 和 input 在同一行排列 */
-  .inputs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .inputs label {
-    margin-right: 8px;
-    min-width: 250px; /* 固定宽度，保证冒号对齐 */
-    text-align: right;
-  }
-  
-  .inputs input {
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-  
-  /* 按钮行，居中显示 */
-  .button-line {
-    margin: 20px 0;
-    text-align: center;
-  }
-  
-  .button-line button {
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* 轮盘容器 */
-  .roulette-container {
-    position: relative;
-    width: 400px;   /* 根据实际图片大小调整 */
-    height: 400px;
-    margin: 0 auto;
-  }
-  
-  /* 轮盘图片 */
-  .roulette-wheel {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  
-  .ball-container {
-    position: absolute;
-    width: 400px;       /* 与轮盘图片相同大小 */
-    height: 400px;
-    top: 0;
-    left: 0;
-    transform-origin: 50% 50%; /* 以中心为旋转原点 */
-    transform: translateZ(0);
-  }
-  
-  .ball {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 50%;
-    
-    /* 1) 让小球中心与容器中心重合 */
-    top: 50%;
-    left: 50%;
-    transform-origin: center center;
-    transform: translate(-50%, -50%)
-      /* 2) 再额外向上移动 140px，让小球处在半径=140px 的位置 */
-      translate(0, -140px);
-  }
-  
-  
-  /* 总金额显示 */
-  #totalMoney {
-    margin-top: 20px;
-    font-size: 18px;
-  }
+  /* 1) 让小球中心与容器中心重合 */
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%)
+    /* 2) 再额外向上移动 140px，让小球处在半径=140px 的位置 */
+    translate(0, -100px);
+}
+
+
+/* 总金额显示 */
+#totalMoney {
+  margin-top: 20px;
+  font-size: 18px;
+}
   
