@@ -4,7 +4,7 @@ document.getElementById("startBtn").addEventListener("click", startGame);
 // 全局变量定义
 let angle = 0;             // 当前旋转角度
 let speed = 0;             // 当前旋转速度（度/帧）
-let deceleration = 0.04;   // 减速度（度/帧²）
+let deceleration = 0.05;   // 减速度（度/帧²）
 let spinning = false;      // 是否正在旋转
 let totalMoney = 100;      // 初始金额为 100
 
@@ -39,7 +39,7 @@ function startGame() {
   if (spinning) return;
 
   // 初始化旋转速度（随机范围内）
-  speed = 10 + Math.random() * 10;
+  speed = 20 + Math.random() * 10;
   spinning = true;
 
   // 启动动画
