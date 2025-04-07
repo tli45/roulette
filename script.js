@@ -1,7 +1,7 @@
 // 绑定 START 按钮点击事件
 document.getElementById("startBtn").addEventListener("click", startGame);
 
-// 为胜利模态窗口的按钮绑定事件
+// 绑定胜利模态窗口按钮事件
 document.getElementById("playAgainBtnWin").addEventListener("click", function() {
   document.getElementById("winModal").style.display = "none";
   resetGame();
@@ -11,7 +11,7 @@ document.getElementById("closeBtnWin").addEventListener("click", function() {
   document.getElementById("winModal").style.display = "none";
 });
 
-// 为失败模态窗口的按钮绑定事件
+// 绑定失败模态窗口按钮事件
 document.getElementById("playAgainBtnLose").addEventListener("click", function() {
   document.getElementById("loseModal").style.display = "none";
   resetGame();
@@ -30,11 +30,11 @@ let totalMoney = 100;      // 初始金额为 100
 
 const ballContainer = document.getElementById("ballContainer");
 
-/* 
-  定义美式双零轮盘的数字顺序（共 38 格）
+/*
+  定义美式双零轮盘的数字顺序（共38格）
   顺序为：0, 28, 9, 26, 30, 11, 7, 20, 32, 17, 5, 22, 34, 15, 3, 24,
-           36, 13, 1, "00", 27, 10, 25, 29, 12, 8, 19, 31, 18, 6,
-           21, 33, 16, 4, 23, 35, 14, 2
+         36, 13, 1, "00", 27, 10, 25, 29, 12, 8, 19, 31, 18, 6,
+         21, 33, 16, 4, 23, 35, 14, 2
 */
 const pockets = [
   0, 28, 9, 26, 30, 11, 7, 20, 32, 17, 5, 22, 34, 15, 3, 24,
@@ -42,22 +42,22 @@ const pockets = [
   21, 33, 16, 4, 23, 35, 14, 2
 ];
 
-// 由于美式轮盘有 38 格，每格所占角度
+// 美式轮盘共38格，每格的角度
 const pocketCount = pockets.length; // 38
 const segmentAngle = 360 / pocketCount;  // ≈9.4737°
-/*
-  offsetAngle 用于校正图片中数字的实际朝向
-  如若图片中“0”不在正上方，则需调整这个偏移量
-*/
+
+// offsetAngle 用于校正轮盘图片的实际朝向，如果图片中"0"不在正上方请调整该值
 const offsetAngle = 0;  // 根据实际情况调整
 
 /**
- * 根据当前 angle 返回对应的轮盘数字
+ * 根据当前角度返回对应的轮盘数字
+ * @param {number} angle - 当前旋转角度
+ * @returns 返回对应的口袋数字（可能是数字或"00"）
  */
 function getPocketByAngle(angle) {
-  // 归一化 angle 到 [0, 360)
+  // 将角度归一化到[0, 360)
   angle = ((angle % 360) + 360) % 360;
-  // 加上图片偏移量
+  // 加上偏移量以校正图片朝向
   let adjustedAngle = angle + offsetAngle;
   adjustedAngle = ((adjustedAngle % 360) + 360) % 360;
   const index = Math.floor(adjustedAngle / segmentAngle);
@@ -65,36 +65,36 @@ function getPocketByAngle(angle) {
 }
 
 /**
- * 开始游戏函数
+ * 开始游戏函数，验证输入并启动旋转动画
  */
 function startGame() {
-  // 获取用户输入的猜测数字（允许输入 "00"）
+  // 获取用户输入的猜测数字（允许输入"00"）和赌注金额
   const guessInput = document.getElementById("guessNumber").value;
   const bet = parseFloat(document.getElementById("betAmount").value);
 
-  // 对猜测进行基本验证：如果不是 "00" 则应为数字 1~36
+  // 验证猜测数字：如果不是"00"，则必须是1~36之间的数字
   if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
-    alert("Please enter your guess number in range of 1~36 or '00'");
+    alert("请输入1~36之间的数字或 '00'");
     return;
   }
   if (isNaN(bet) || bet <= 0) {
-    alert("Please enter valid bet");
+    alert("请输入有效的赌注");
     return;
   }
   if (bet > totalMoney) {
-    alert("Bet cannot be greater than total money");
+    alert("赌注不能超过当前总金额");
     return;
   }
   if (spinning) return;
 
-  // 初始化旋转速度（随机范围内）
+  // 初始化旋转速度（随机在10到20之间）
   speed = 10 + Math.random() * 10;
   spinning = true;
   requestAnimationFrame(spin);
 }
 
 /**
- * 动画循环：旋转小球并逐步减速
+ * 旋转动画循环，逐渐减速
  */
 function spin() {
   if (!spinning) return;
@@ -114,37 +114,30 @@ function spin() {
 }
 
 /**
- * 检查结果，并更新总金额
- */
-/**
- * Checks the result, updates total money, outputs the final number, and shows the corresponding modal.
+ * 检查结果，更新总金额，并在窗口中显示最终数字
  */
 function checkResult() {
-    // Get the actual pocket from the current angle
-    const finalPocket = getPocketByAngle(angle);
-    // Output the final pocket number to the console
-    console.log("Final Number: " + finalPocket);
-    
-    // Update an element on the page to display the final number
-    document.getElementById("finalNumber").innerText = "Final Number: " + finalPocket;
-    
-    const guessInput = document.getElementById("guessNumber").value;
-    const bet = parseFloat(document.getElementById("betAmount").value);
-    
-    // Convert guess input to number or "00" string if applicable
-    let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
-    
-    if (finalPocket === guess) {
-      totalMoney += bet * 36;
-      showWinModal();
-    } else {
-      totalMoney -= bet;
-      showLoseModal();
-    }
-    
-    document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
-}
+  // 根据当前角度获取最终数字
+  const finalPocket = getPocketByAngle(angle);
+  const guessInput = document.getElementById("guessNumber").value;
+  const bet = parseFloat(document.getElementById("betAmount").value);
   
+  // 如果用户输入的是"00"，直接使用字符串比较，否则转换为数字比较
+  let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
+  
+  if (finalPocket === guess) {
+    totalMoney += bet * 36;
+    // 更新胜利窗口中显示最终数字的文本
+    document.getElementById("resultTextWin").innerText = "最终数字：" + finalPocket;
+    showWinModal();
+  } else {
+    totalMoney -= bet;
+    // 更新失败窗口中显示最终数字的文本
+    document.getElementById("resultTextLose").innerText = "最终数字：" + finalPocket;
+    showLoseModal();
+  }
+  document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
+}
 
 /**
  * 显示胜利模态窗口
@@ -161,7 +154,7 @@ function showLoseModal() {
 }
 
 /**
- * 重置游戏状态（如小球角度）
+ * 重置游戏状态（例如将旋转角度重置为0）
  */
 function resetGame() {
   angle = 0;
