@@ -116,24 +116,35 @@ function spin() {
 /**
  * 检查结果，并更新总金额
  */
+/**
+ * Checks the result, updates total money, outputs the final number, and shows the corresponding modal.
+ */
 function checkResult() {
-  // 获取实际落盘数字
-  const finalPocket = getPocketByAngle(angle);
-  const guessInput = document.getElementById("guessNumber").value;
-  const bet = parseFloat(document.getElementById("betAmount").value);
-  
-  // 如果用户输入的是 "00"，直接比较字符串；否则转换为数字
-  let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
-  
-  if (finalPocket === guess) {
-    totalMoney += bet * 36;
-    showWinModal();
-  } else {
-    totalMoney -= bet;
-    showLoseModal();
-  }
-  document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
+    // Get the actual pocket from the current angle
+    const finalPocket = getPocketByAngle(angle);
+    // Output the final pocket number to the console
+    console.log("Final Number: " + finalPocket);
+    
+    // Update an element on the page to display the final number
+    document.getElementById("finalNumber").innerText = "Final Number: " + finalPocket;
+    
+    const guessInput = document.getElementById("guessNumber").value;
+    const bet = parseFloat(document.getElementById("betAmount").value);
+    
+    // Convert guess input to number or "00" string if applicable
+    let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
+    
+    if (finalPocket === guess) {
+      totalMoney += bet * 36;
+      showWinModal();
+    } else {
+      totalMoney -= bet;
+      showLoseModal();
+    }
+    
+    document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
 }
+  
 
 /**
  * 显示胜利模态窗口
