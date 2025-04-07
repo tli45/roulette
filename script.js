@@ -89,15 +89,15 @@ function startGame() {
 
   // 验证猜测数字：如果不是"00"，则必须是1~36之间的数字
   if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
-    alert("Please make sure the number is in range of 1 to 36 or '00'");
+    alert("Please make sure the number is in range of 1 to 36.");
     return;
   }
   if (isNaN(bet) || bet <= 0) {
-    alert("Please enter valid bet amount");
+    alert("Please enter a valid bet amount.");
     return;
   }
   if (bet > totalMoney) {
-    alert("Bet amount cannot exceed current total amount");
+    alert("Bet amount cannot exceed current total amount of money.");
     return;
   }
   if (spinning) return;
