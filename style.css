@@ -160,3 +160,11 @@ html, body {
 background-color: #656060; 
 color: #fff;  
 }
+
+/* 调整胜利和失败模态窗口中图片的尺寸 */
+#winModal .modal-content img,
+#loseModal .modal-content img {
+  width: 150px;  /* 根据需要设置合适的宽度 */
+  height: auto;  /* 高度自适应 */
+}
+
