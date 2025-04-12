@@ -21,9 +21,10 @@ document.getElementById("closeBtnLose").addEventListener("click", function() {
   document.getElementById("loseModal").style.display = "none";
 });
 
-// 绑定空钱模态窗口按钮事件，当总金额为0时点击“add money to continue”
+// 绑定空钱模态窗口按钮事件，当总金额为0时点击“Add Money to Continue”
 document.getElementById("addMoneyBtn").addEventListener("click", function() {
   totalMoney += 100;  // 增加 100 块
+  totalMoney = parseFloat(totalMoney.toFixed(2));  // 保留两位小数
   document.getElementById("totalMoney").innerText = "Total Money: " + totalMoney;
   document.getElementById("emptyMoneyModal").style.display = "none";
 });
@@ -33,7 +34,7 @@ let angle = 0;             // 当前旋转角度
 let speed = 0;             // 当前旋转速度（度/帧）
 let deceleration = 0.05;   // 减速度（度/帧²）
 let spinning = false;      // 是否正在旋转
-let totalMoney = 100;      // 初始金额为 100
+let totalMoney = 100;      // 初始金额为 100（允许小数，但两位精度）
 
 const ballContainer = document.getElementById("ballContainer");
 
@@ -54,7 +55,7 @@ const pocketCount = pockets.length; // 38
 const segmentAngle = 360 / pocketCount;  // ≈9.4737°
 
 // offsetAngle 用于校正轮盘图片的实际朝向
-// 这里设置为：180度 + 半个分格角度，确保图片中"0"位于正下方
+// 这里设置为：180° + 半个分格角度，确保图片中"0"位于正下方
 const offsetAngle = 180 + segmentAngle / 2;
 
 /**
@@ -74,7 +75,10 @@ function getPocketByAngle(angle) {
 
 /**
  * 开始游戏函数，验证输入并启动旋转动画
- * 当总金额为0时，弹出“add money”窗口，不启动游戏
+ * 条件说明：
+ *   1. 猜测数字必须为整数，不允许包含小数点，否则弹出 "please enter a valid integer"
+ *   2. 赌注金额允许为小数，但最多两位小数，不符合则弹出 "please enter a valid bet amount (up to two decimal places)"
+ *   3. 当总金额为0时，弹出空钱模态窗口，不启动游戏
  */
 function startGame() {
   // 如果总金额为0，则弹出空钱模态窗口
@@ -83,21 +87,30 @@ function startGame() {
     return;
   }
   
-  // 获取用户输入的猜测数字（允许输入"00"）和赌注金额
-  const guessInput = document.getElementById("guessNumber").value;
-  const bet = parseFloat(document.getElementById("betAmount").value);
-
+  // 获取用户输入的内容，并去除前后空格
+  const guessInput = document.getElementById("guessNumber").value.trim();
+  const betInput = document.getElementById("betAmount").value.trim();
+  
   // 验证猜测数字必须为整数（不允许含有小数点）
   if (guessInput.indexOf('.') !== -1) {
     alert("please enter a valid integer");
     return;
   }
-
-  // 验证猜测数字：如果不是"00"，则必须是1~36之间的数字
-  if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
-    alert("Please make sure the number is in range of 1 to 36.");
+  
+  // 验证赌注金额格式：允许整数或最多两位小数（使用正则表达式）
+  if (!/^\d+(\.\d{1,2})?$/.test(betInput)) {
+    alert("please enter a valid bet amount (up to two decimal places)");
     return;
   }
+  
+  // 验证猜测数字：如果不是 "00"，则必须在 1~36 之间
+  if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
+    alert("Please make sure the number is in range of 1 to 36 or '00'");
+    return;
+  }
+  
+  // 将赌注转换为浮点数
+  const bet = parseFloat(betInput);
   if (isNaN(bet) || bet <= 0) {
     alert("Please enter a valid bet amount.");
     return;
@@ -141,24 +154,21 @@ function checkResult() {
   // 根据当前角度获取最终数字
   const finalPocket = getPocketByAngle(angle);
   const guessInput = document.getElementById("guessNumber").value;
-  // 这里 bet 已经是整数，无需担心小数
-  const bet = parseInt(document.getElementById("betAmount").value, 10);
-
-  // 如果用户输入的是"00"，直接使用字符串比较，否则转换为数字比较
-  let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
+  const bet = parseFloat(document.getElementById("betAmount").value);
+  
+  // 如果用户输入的是 "00"，直接使用字符串比较，否则转换为整数比较
+  let guess = (guessInput === "00") ? "00" : parseInt(guessInput, 10);
   
   if (finalPocket === guess) {
-    if (finalPocket === guess) {
-      totalMoney += bet * 36;
-    } else {
-      totalMoney -= bet;
-    }
-    totalMoney = parseInt(totalMoney, 10);
+    totalMoney += bet * 36;
+    // 保证总金额保留两位小数
+    totalMoney = parseFloat(totalMoney.toFixed(2));
     // 更新胜利窗口中显示最终数字的文本
     document.getElementById("resultTextWin").innerText = "Result Number: " + finalPocket;
     showWinModal();
   } else {
     totalMoney -= bet;
+    totalMoney = parseFloat(totalMoney.toFixed(2));
     // 更新失败窗口中显示最终数字的文本
     document.getElementById("resultTextLose").innerText = "Result Number: " + finalPocket;
     showLoseModal();
