@@ -87,6 +87,12 @@ function startGame() {
   const guessInput = document.getElementById("guessNumber").value;
   const bet = parseFloat(document.getElementById("betAmount").value);
 
+  // 验证猜测数字必须为整数（不允许含有小数点）
+  if (guessInput.indexOf('.') !== -1) {
+    alert("please enter a valid integer");
+    return;
+  }
+
   // 验证猜测数字：如果不是"00"，则必须是1~36之间的数字
   if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
     alert("Please make sure the number is in range of 1 to 36.");
@@ -135,13 +141,19 @@ function checkResult() {
   // 根据当前角度获取最终数字
   const finalPocket = getPocketByAngle(angle);
   const guessInput = document.getElementById("guessNumber").value;
-  const bet = parseFloat(document.getElementById("betAmount").value);
-  
+  // 这里 bet 已经是整数，无需担心小数
+  const bet = parseInt(document.getElementById("betAmount").value, 10);
+
   // 如果用户输入的是"00"，直接使用字符串比较，否则转换为数字比较
   let guess = guessInput === "00" ? "00" : parseInt(guessInput, 10);
   
   if (finalPocket === guess) {
-    totalMoney += bet * 36;
+    if (finalPocket === guess) {
+      totalMoney += bet * 36;
+    } else {
+      totalMoney -= bet;
+    }
+    totalMoney = parseInt(totalMoney, 10);
     // 更新胜利窗口中显示最终数字的文本
     document.getElementById("resultTextWin").innerText = "Result Number: " + finalPocket;
     showWinModal();
