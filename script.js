@@ -93,7 +93,7 @@ function startGame() {
   
   // 验证猜测数字必须为整数（不允许含有小数点）
   if (guessInput.indexOf('.') !== -1) {
-    alert("please enter a valid integer");
+    alert("choosing number: please choose a valid integer");
     return;
   }
   
@@ -105,7 +105,7 @@ function startGame() {
   
   // 验证猜测数字：如果不是 "00"，则必须在 1~36 之间
   if (guessInput === "" || (guessInput !== "00" && (isNaN(parseInt(guessInput, 10)) || parseInt(guessInput, 10) < 1 || parseInt(guessInput, 10) > 36))) {
-    alert("Please make sure the number is in range of 1 to 36 or '00'");
+    alert("Please make sure the number is in range of 1 to 36");
     return;
   }
   
